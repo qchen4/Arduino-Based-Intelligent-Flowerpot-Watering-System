@@ -1,183 +1,109 @@
-# Arduino-Based-Intelligent-Flowerpot-Watering-System
-A simple DIY Arduino-based home automation project that uses soil moisture sensors, pumps and other electronic components to automatically water plants.
+# Arduino-Based Intelligent Flowerpot Watering System
 
-部件和材料
+This is a simple DIY Arduino-based home automation project that uses soil moisture sensors, pumps, and other electronic components to automatically water plants.
 
-Arduino NANO开发板 1块
+## Components and Materials
 
+- 1 Arduino NANO development board
+- 1 IO expansion board
+- 1 IO expansion module kit
+- App and online services
 
+### Required Software
 
+- Arduino IDE
 
+## Project Background
 
-IO扩展板 1块
+Create an intelligent irrigation controller using Arduino.
 
+Smartly water your yard or garden with dynamic water circulation. Don't water your yard if it's raining or has rained since the last watering. Detect sunrise time using a light sensor and automatically adjust the water start time. Stop watering the yard if the weather is too cold.
 
+## Features
 
+- Outdoor temperature sensor
+- Outdoor rain sensor
+- Outdoor light sensor
+- Battery-powered RTC supports weekly irrigation schedules
+- Non-volatile storage - irrigation settings parameters won't be lost due to power outage
+- Sunrise detection
+- Smart watering can save on your water bill
+- Watering before sunrise to allow for proper penetration
+- Reduce fungal growth
+- Simple scheduling control
 
+## Parts List for Building the Intelligent Irrigation Controller
 
-IO扩展模块包 1套
-app和在线服务
+- 1 IO expansion board
+- 2 One-wire to I2C converters
+- 1 One-wire connector
+- 1 Optical fiber connector
+- 1 Optical splitter
+- 1 Arduino Nano development board
+- 4-channel DC 5V relay
+- TSL2561 light sensor
+- DS18B20 waterproof temperature sensor
+- Optical infrared water level sensor
+- DS3231 AT24C32 IIC precise real-time clock
+- I2C SSD1306 OLED 128x64 display
+- Transparent waterproof plastic enclosure 200x120x75mm
+- Transparent waterproof plastic enclosure 100x68x50mm
+- IP68 PG7 waterproof nylon cable gland
+- IP68 PG11 waterproof nylon cable gland
+- RJ11 screw terminal connector
+- 50ft 4C4P RJ11 cable
+- 6" 4C4P RJ11 cable
+- 2.54mm jumper wires
+- 2-pin SPST momentary micro push-button switches (2)
+- 12VDC 1A adapter power supply
 
+## Wiring Diagram
 
+*Include wiring diagram here.*
 
+## OLED Display
 
-Arduino IDE
+Click the Menu button to display the menu and continue clicking this button to cycle through all menu options. The menu will automatically return if there is no activity for 30 seconds. Press the Select button to execute the desired menu function.
 
+## Why Use IO Expanders?
 
-项目背景
-使用Arduino创建智能灌溉控制器
+- Simplifies the design
+- Uses readily available parts
+- No need to write one-wire driver code
+- No need to write DS3231 RTC driver code
+- No need to write EEPROM driver code
+- No need to write OLED driver code
+- No display fonts occupy Arduino code space
+- No need to write temperature sensor driver code
+- No need to write optical rain sensor driver code
+- Saves Arduino code space; only 12,710 bytes (39%)
+- Took only three days to write the code
+- Easy to wire using standard RJ11 phone cables
+- No sensor cable length issues
+- More cost-effective than similar commercial systems
+- Easy to modify to suit individual needs
+- Single power supply
 
-智能灌溉您的院子或花园用动态水循环。如果正在下雨，或者自从上次浇水后就已经下雨了，不要再给院子浇水了。使用光传感器检测日出时间，并自动调整水开始时间。如果天气太冷，就停止给院子浇水。
+## System Build
 
-功能列表
-户外温度传感器
-户外下雨传感器
-户外光照传感器
-有电池的RTC支持按周的灌溉调度
-非易失性存储-永远不会因为断电而丢失灌溉设置参数
-日出检测
-智能的浇水可以节省你的水费
-日出前浇水，留出适当的渗透时间
-减少真菌生长
-简单的调度控制
+Connect the Arduino Nano to the IO expander and program it with the provided code. The 6-pin header is the software's serial debug port, which is not needed in the final installation.
 
+Ensure you change the addresses defined as ONEWIRE_TO_I2C_ROM1 and ONEWIRE-TO-I2C_ROM2 to match your one-wire address with the I2C address.
 
+Note: If you use the USB port to program the Arduino Nano, you must disconnect it from the IO expander since it also uses the same single serial port. Alternatively, if you want to debug, use the ICSP port to program the ATmega328P. To enable the software debug port, uncomment the SERIAL_DEBUG definition.
 
-制作智能灌溉控制器所需的零件清单
+The distributor must first be configured to isolate the optical infrared sensor data line from the single-wire remote sensor line. Solder a 0-ohm 0603 resistor at R2.
 
-IO扩展板 1块
-单总线转I2C 2块
-单线连接器 1个
-光纤连接器 1个
-光分路器 1个
-Arduino Nano开发板 1块
-4路直流5V继电器
-TSL2561光传感器
-DS18B20防水温度传感器
-光学红外水位传感器
-DS3231 AT24C32 IIC精密实时时钟
-I2C SSD1306 OLED 128x64显示屏
-透明防水塑料外壳200x120x75mm
-透明防水塑料外壳100x68x50mm
-ip68 pg7防水尼龙电缆盖
-ip68 pg11防水尼龙电缆盖
-RJ11 螺钉接线端子
-50英尺4C4P RJ11线
-6" 4C4P RJ11线
-2.54毫米接头线
-2引脚SPST瞬时微动按钮开关 2个
-12VDC 1A适配器电源
+Drill a 7/16" hole in the small enclosure and an 11/16" hole on the right side of the larger enclosure to accommodate the PG7 and PG11 waterproof cable glands. Use a Dremel tool to slightly enlarge the holes until the glands fit snugly. The PG7 will provide the remote sensor, PG11 will provide 12VDC, 24VAC, multiple wires, and RJ11 remote sensor wires.
 
+Connect the SPST momentary micro push-button switches to the RJ11 screw terminals. Insulate the contacts with heat shrink tubing.
 
-接线图
+Connect all wires and assemble/fit all components into the larger enclosure. The 50ft RJ11 cable for connecting remote sensors should pass through the PG11 waterproof gland without the need to cut it.
 
+Drill a 9/16-inch hole at the top of the small enclosure for mounting the optical infrared water sensor. Use a Dremel tool to slightly enlarge the hole until the sensor fits in place. The small remote sensor fits snugly with the enclosure, but if the sensor is oriented as recommended, it should fit just right. Keeping the RJ11 cable as short as possible will help it fit into the smaller enclosure. After assembly, it's recommended to add some waterproof adhesive to the nuts on the compression gland before screwing them on for a better seal.
 
+Mount the remote sensor enclosure outdoors and elevate it to the east side of your house, ensuring that the optical infrared rain sensor and light sensor are facing the sky without any obstructions in between.
 
+Drill a 1/4" hole near the top center of the larger enclosure, then install the button. Use a Dremel tool to slightly enlarge the hole until the button fits in place.
 
-
-
-OLDE显示屏
-
-
-
-点击Menu按钮显示菜单，并继续点击此按钮循环完成所有菜单选项。如果30秒没有操作这个菜单将会自动返回。按下选择按钮以执行所需的菜单功能。
-
-那么为什么使用IO扩展器呢?
-设计更简单
-现成的零件
-不需要编写单线驱动程序
-不需要编写DS3231 RTC驱动程序
-不需要编写EEPROM 驱动程序
-不需要编写OLED驱动程序
-没有显示字体占用Arduino代码空间
-不需要编写温度传感器驱动程序
-不需要编写光学雨感测器驱动程序
-节省Arduino上的代码空间;只有12710字节(39%)
-只要三天的时间来写代码
-易于电线使用标准的RJ11电话电缆
-无传感器电缆长度问题
-比类似的商业系统更便宜
-易于进行更改以适应个别需求
-单电源供电
-
-
-系统构建
-
-将Arduino Nano连接到IO扩展器，并使用以下代码对其进行编程。6 pin头是软件的串行调试端口，在最终的安装中是不需要的。
-
-
-
-
-
-
-
-
-确保您更改了ONEWIRE_TO_I2C_ROM1和ONEWIRE-TO_I2C_ROM2定义的地址，使您的单总线地址与I2C地址相匹配。
-
-注意:如果您使用USB端口来给Arduino Nano编程，您必须断开它与IO扩展器的连接，因为它也使用相同的单一串行端口，相反，如果您想调试使用ICSP端口来编程ATmega328P。要启用软件调试端口，请取消对SERIAL_DEBUG定义的注释。
-
-分配器必须首先配置为将光学红外传感器数据线与单线远程传感器线隔离。在R2处焊接零欧姆0603电阻。
-
-
-
-
-
-
-
-
-在小外壳上钻一个7/16"孔，在较大的外壳的右侧钻一个11/16"的孔，用来装PG7和PG11防水接线端。使用达美电磨工具稍微扩大孔，直到压盖盖紧。PG7将为远程传感器、PG11提供12VDC、24VAC、多种电线和RJ11远程传感器电线。
-
-
-
-
-
-
-
-将SPST轻触按钮微动开关接上RJ11螺丝端子。使用热收缩管绝缘接触端。
-
-
-
-
-
-
-
-
-连接所有电线和组装/馈送所有部件到大外壳。将所有部件装到大外壳里，并连接所有导线。
-
-用于连接远程传感器的50英尺的RJ11电缆应该刚好穿过PG11防水头，而不必剪断它。
-
-
-
-
-
-
-
-
-在小外壳的顶部钻一个9/16英寸的孔，用于安装光学红外水传感器。使用达美电磨工具稍微把孔扩大一点，直到传感器安装到位。小型远程传感器与外壳紧密贴合，但是如果传感器是按照推荐的方向放置的，那么它应该刚好合适。使RJ11电缆尽可能短将有助于把它塞进更小的外壳。组装完成后，建议在拧上螺母之前在压盖螺母垫圈中添加一些防水胶，将会有更好的密封效果。
-
-
-
-
-
-
-
-
-在屋外安装远程传感器器外壳，并将其升高到您房子的东侧，同时使光学红外雨传感器和光照度传感器指向天空，中间不要有任何障碍物。
-
-
-
-
-
-
-
-
-在大外壳的顶部靠中间靠下的位置钻1/4“的孔，然后安装按钮。使用达美电磨工具稍微扩大孔，直到按钮安装到位。
-
-
-
-
-
-
-
-
-测试系统，确保一切正常。要测试继电器和传感器，请断开Arduino与IO扩展器的连接，并将其直接连接到您的计算机以手动控制它。一旦您确认一切正常，使用双面胶带和包装泡沫将所有部件组装到外壳中，以保护您的电路板，并享受智能灌溉控制器带来的好处和节约用水。
+Test the system to ensure everything works correctly. To test the relays and sensors, disconnect the Arduino from the IO expander and connect it directly to your computer to control it manually. Once you confirm everything is working fine, assemble all components into the enclosure using double-sided tape and packing foam to protect your circuit board and enjoy the benefits and water savings of the smart irrigation controller.
