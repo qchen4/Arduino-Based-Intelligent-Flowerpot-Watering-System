@@ -1,16 +1,15 @@
-/* IO Expander sketch optimized
- *  
- * Irrigation System v1.1
- * 
- */
+// Including necessary libraries for mathematical functions, time management, CRC calculations, watchdog timer, and serial communication.
 #include <math.h>
-#include <time.h> // File located \Program Files (x86)\Arduino\hardware\tools\avr\avr\include\time.h
+#include <time.h>
 #include <util/crc16.h>
 #include <avr/wdt.h>
 #include <SoftwareSerial.h>
 #include "IOExpander.h"
 
-#define FAHRENHEIT
+
+// Defining constants for configuration and commands used in the system.
+#define FAHRENHEIT  // Setting temperature unit to Fahrenheit
+// Various commands and settings for initializing and configuring different components like sensors and I2C devices.
 #define INIT_BOARD              "g5w1;g11w1;g11d0,75;g12w1;g12d0,75;rsf"
 #define ONEWIRE_TO_I2C_ROM1     "i4scc"
 #define ONEWIRE_TO_I2C_ROM2     "i6s8f"
@@ -23,6 +22,7 @@
 #define BUTTON1                 "g11d"
 #define BUTTON2                 "g12d"
 
+// Setting various parameters for the irrigation system like watering times, light levels for sunrise detection, temperature thresholds, etc.
 #define WATER_TIME_BEFORE_SUNRISE 60
 #define SUNRISE_LUX             100
 #define RAIN_DETECT_LEVEL       4.0
@@ -30,6 +30,7 @@
 
 #define MAX_ZONES               4
 
+// Defining constants for time calculation and day of week identification.
 #define HOUR_IN_DAY             24L
 #define MIN_IN_HOUR             60L
 #define SEC_IN_MIN              60L
@@ -87,6 +88,7 @@ enum {
   MENU_ON_OFF
 };
 
+// Struct definitions for organizing data related to zones, schedules, and non-volatile memory (NVRAM).
 typedef struct {
   char description[16];
   uint8_t relay;
@@ -100,6 +102,7 @@ typedef struct {
   uint8_t duration;
 } SCHEDULE;
 
+// Global variables and arrays to hold zone, schedule, and NVRAM data.
 typedef struct {
   time_t sunrise_time;
   time_t last_water_time;
@@ -141,6 +144,7 @@ SCHEDULE schedule[] = {
 NVRAM nvram;
 bool update_nvram = false;
 
+// Function to calculate CRC for data integrity checks.
 uint8_t crc8(uint8_t* data, uint16_t length)
 {
   uint8_t crc = 0;
